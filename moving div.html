@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<link rel="stylesheet" href="style.css">
+		 <script src="jquery-1.10.1.js"></script>
+
+			<title>task #1</title>
+	</head>
+	<body>
+		<div class="container">
+			<div class="mover">
+				
+			</div>
+		</div>
+
+	<script>
+
+
+		$(document).ready(function () {
+			var direction = "right";
+			var counter = 0;
+			var iterationCount = 0; 
+
+			function moveDiv() {
+				var oldOne = $(".mover").last();
+				
+				var newOne = oldOne.clone();
+				var newPosition;
+				var oldDirection = direction;
+
+				switch(direction) {
+					case "right" :
+						newPosition = oldOne.position().left + oldOne.width();
+						if (newPosition >= oldOne.parent().width() - oldOne.width() * counter ) {
+							direction = "down";
+						}else {
+							newOne.css("left", newPosition); 
+							newOne.insertAfter(oldOne);
+						}
+						break;
+					case "down" :
+						newPosition = oldOne.position().top + oldOne.height();
+						if (newPosition >= oldOne.parent().height() - oldOne.height() * counter) {
+							direction = "left";
+						}else {
+							
+							newOne.css("top", newPosition); 
+							newOne.insertAfter(oldOne);
+						}
+						break;
+					case "left" :
+						newPosition = oldOne.position().left - oldOne.width();
+						if (newPosition < oldOne.width() * counter) {
+							direction = "up";
+							
+						}else {
+							newOne.css("left", newPosition); 
+							newOne.insertAfter(oldOne);
+						}
+						break;
+					case "up" :
+						newPosition = oldOne.position().top - oldOne.height();
+						if (newPosition < oldOne.height() * (counter + 1) ) {
+							direction = "right";
+							counter++;
+						}else {
+							newOne.css("top", newPosition); 
+							newOne.insertAfter(oldOne);
+						}
+						break;
+				}
+				if(oldDirection != direction){
+					iterationCount++;
+					if(iterationCount === 2) {
+						clearInterval(move);
+						return;
+					}
+					moveDiv(direction);
+				}else {
+					iterationCount = 0;
+				}	
+			};
+
+			var interval = 100;
+			var move = setInterval(moveDiv, interval);
+
+		});
+
+	</script>
+	</body>
+</html>

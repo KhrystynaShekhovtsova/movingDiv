@@ -1,0 +1,19 @@
+.container {
+	border: 1px solid green;
+	width: 300px;
+	height: 300px;
+	border-radius: 2px;
+	margin: auto;
+	left: 0;
+	top: 0;
+	right: 0;
+	
+	position: relative;
+}
+.mover {
+	width: 30px;
+	height: 30px;
+	background-color: green;
+	border-radius: 10px;
+	position: absolute;
+}
